@@ -12,8 +12,7 @@ void add(stack_t **stack)
 {
 if (*stack == NULL || (*stack)->next == NULL)
 {
-const char *error_message = "Error: can't add, stack too short\n";
-write(STDERR_FILENO, error_message, strlen(error_message));
+fprintf(stderr, "Error: can't add, stack too short\n");
 exit(EXIT_FAILURE);
 }
 (*stack)->next->n += (*stack)->n;
