@@ -1,0 +1,91 @@
+#include "monty.h"
+
+int main(int argc, char *argv[])
+{
+        FILE *file;
+        stack_t *stack;
+         char opcode[5];
+         int value;
+         unsigned int line_number;
+
+    if (argc != 2)
+    {
+        fprintf(stderr, "Usage: %s file\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+
+    file = fopen(argv[1], "r");
+    if (file == NULL)
+    {
+        fprintf(stderr, "Error: cannot open file %s\n", argv[1]);
+        exit(EXIT_FAILURE);
+    }
+
+    stack = NULL;
+    line_number = 1;
+
+    while (fscanf(file, "%4s", opcode) != EOF)
+    {
+        if (strcmp(opcode, "push") == 0)
+        {
+            if (fscanf(file, "%d", &value) != 1)
+            {
+                fprintf(stderr, "Error: invalid value at line %u\n", line_number);
+                exit(EXIT_FAILURE);
+            }
+            push(&stack, value);
+        }
+        else if (strcmp(opcode, "pall") == 0)
+        {
+            pall(&stack);
+        }
+        else if (strcmp(opcode, "pint") == 0)
+        {
+            pint(&stack);
+        }
+        else if (strcmp(opcode, "pop") == 0)
+        {
+            pop(&stack);
+        }
+ else if (strcmp(opcode, "swap") == 0)
+        {
+            swap(&stack);
+        }
+ else if (strcmp(opcode, "add") == 0)
+        {
+            add(&stack);
+        }
+        else if (strcmp(opcode, "nop") == 0)
+        {
+            nop(&stack);
+        }
+        else if (strcmp(opcode, "sub") == 0)
+        {
+            sub(&stack);
+        }
+        else if (strcmp(opcode, "div") == 0)
+        {
+            stack_div(&stack);
+        }
+        else if (strcmp(opcode, "mul") == 0)
+        {
+            stack_mul(&stack);
+        }
+        else if (strcmp(opcode, "mod") == 0)
+        {
+            stack_mod(&stack);
+        }
+        else
+        {
+            fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+            exit(EXIT_FAILURE);
+        }
+
+        line_number++;
+    }
+
+    fclose(file);
+    free(stack);
+    return EXIT_SUCCESS;
+}
+
