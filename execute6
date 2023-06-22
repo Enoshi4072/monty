@@ -8,14 +8,14 @@ void execute_instruction(stack_t **stack, char *opcode, unsigned int line_number
         value_str = strtok(NULL, " \n\t");
         if (value_str == NULL)
         {
-            fprintf(stderr, "L%u: usage: push integer\n", line_number);
+            printf("L%u: usage: push integer\n", line_number);
             exit(EXIT_FAILURE);
         }
 
         value = atoi(value_str);
         if (value == 0 && strcmp(value_str, "0") != 0)
         {
-            fprintf(stderr, "L%u: usage: push integer\n", line_number);
+            printf("L%u: usage: push integer\n", line_number);
             exit(EXIT_FAILURE);
         }
 
@@ -51,7 +51,7 @@ else if (strcmp(opcode, "sub") == 0)
 }
 else
 {
-fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+printf("L%u: unknown instruction %s\n", line_number, opcode);
 exit(EXIT_FAILURE);
 }
 }

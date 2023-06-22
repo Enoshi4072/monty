@@ -9,14 +9,14 @@ int main(int argc, char *argv[])
 	stack_t *stack;
     if (argc != 2)
     {
-        fprintf(stderr, "Usage: monty <file>\n");
+        printf("Usage: monty <file>\n");
         return EXIT_FAILURE;
     }
 
     file = fopen(argv[1], "r");
     if (file == NULL)
     {
-        fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+        printf("Error: Can't open file %s\n", argv[1]);
         return EXIT_FAILURE;
     }
 

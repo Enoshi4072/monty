@@ -1,6 +1,9 @@
 #include "monty.h"
-
-/* Function to add the top two elements of the stack */
+/**
+ * add - adds top two elements of the stack
+ * @stack: Pointer to the stack
+ * @line_number: number of the line in monty
+ */
 void add(stack_t **stack, unsigned int line_number)
 {
     if (*stack == NULL || (*stack)->next == NULL)
@@ -12,4 +15,3 @@ void add(stack_t **stack, unsigned int line_number)
     (*stack)->next->n += (*stack)->n;
     pop(stack, line_number);
 }
-
