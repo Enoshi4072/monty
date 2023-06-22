@@ -8,7 +8,7 @@ void push(stack_t **stack, unsigned int line_number, int value)
     new_node = malloc(sizeof(stack_t));
     if (new_node == NULL)
     {
-        printf("Error: malloc failed\n");
+        fprintf(stderr, "Error: malloc failed\n");
         exit(EXIT_FAILURE);
     }
 

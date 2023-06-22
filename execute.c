@@ -45,6 +45,10 @@ else if (strcmp(opcode, "nop") == 0)
 {
 	nop(stack, line_number);
 }
+else if (strcmp(opcode, "sub") == 0)
+{
+	sub(stack, line_number);
+}
     else
     {
         printf("L%u: unknown instruction %s\n", line_number, opcode);
