@@ -1,0 +1,54 @@
+#include "monty.h"
+
+void execute_opcode(stack_t **stack, const char *opcode, int value, unsigned int line_number)
+{
+    if (strcmp(opcode, "push") == 0)
+    {
+        push(stack, value);
+    }
+    else if (strcmp(opcode, "pall") == 0)
+    {
+        pall(stack);
+    }
+    else if (strcmp(opcode, "pint") == 0)
+    {
+        pint(stack);
+    }
+    else if (strcmp(opcode, "pop") == 0)
+    {
+        pop(stack);
+    }
+    else if (strcmp(opcode, "swap") == 0)
+    {
+        swap(stack);
+    }
+    else if (strcmp(opcode, "add") == 0)
+    {
+        add(stack);
+    }
+    else if (strcmp(opcode, "nop") == 0)
+    {
+        nop(stack);
+    }
+    else if (strcmp(opcode, "sub") == 0)
+    {
+        sub(stack);
+    }
+    else if (strcmp(opcode, "div") == 0)
+    {
+        stack_div(stack);
+    }
+    else if (strcmp(opcode, "mul") == 0)
+    {
+        stack_mul(stack);
+    }
+    else if (strcmp(opcode, "mod") == 0)
+    {
+        stack_mod(stack);
+    }
+    else
+    {
+        fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+        exit(EXIT_FAILURE);
+    }
+}

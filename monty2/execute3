@@ -1,0 +1,54 @@
+#include "monty.h"
+
+void process_file(const char *filename)
+{
+    FILE *file;
+    unsigned int line_number = 1;
+    char *line = NULL;
+    size_t line_length = 0;
+    stack_t *stack;
+
+    file = fopen(filename, "r");
+    if (file == NULL)
+    {
+        fprintf(stderr, "Error: cannot open file %s\n", filename);
+        exit(EXIT_FAILURE);
+    }
+
+    stack = NULL;
+
+    while (getline(&line, &line_length, file) != -1)
+    {
+        char *token = strtok(line, " \t\n");
+        char opcode[5];
+        int value = 0;
+
+        if (token == NULL)
+        {
+            fprintf(stderr, "Error: invalid opcode at line %u\n", line_number);
+            exit(EXIT_FAILURE);
+        }
+
+        strncpy(opcode, token, sizeof(opcode) - 1);
+        opcode[sizeof(opcode) - 1] = '\0';
+
+        if (strcmp(opcode, "push") == 0)
+        {
+            token = strtok(NULL, " \t\n");
+            if (token == NULL)
+            {
+                fprintf(stderr, "Error: invalid value at line %u\n", line_number);
+                exit(EXIT_FAILURE);
+            }
+            value = atoi(token);
+        }
+
+        execute_opcode(&stack, opcode, value, line_number);
+        line_number++;
+    }
+
+    fclose(file);
+    free(stack);
+    free(line);
+}
+
