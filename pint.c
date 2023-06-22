@@ -10,4 +10,3 @@ void pint(stack_t **stack)
 
     printf("%d\n", (*stack)->n);
 }
-
